@@ -10,7 +10,8 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class MeDizAiOQueFoiApplication(val pessoaProducer: PessoaProducerImp) : ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
-        val pessoa = Pessoa(name = "Bilbu", lastName = " bolseiro")
+        val pessoa = Pessoa(name = "lalala", lastName = " lelele")
+//        Thread.sleep(5000)
         pessoaProducer.persist("12345", pessoa)
     }
 
