@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.1</version>
+        <version>3.4.1</version> <!-- Certifique-se de que a versão é compatível com o restante -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ajudaqui</groupId>
@@ -19,19 +19,32 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Core -->
+        <!-- Spring Boot Web Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Spring Kafka -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+
+        <!-- Kafka Avro Serializer -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>7.5.0</version> <!-- Versão compatível com Kafka 3.8.x -->
+        </dependency>
+
+        <!-- Jackson Kotlin Module -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
+
+        <!-- Kotlin Libraries -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
@@ -41,37 +54,11 @@
             <artifactId>kotlin-stdlib</artifactId>
         </dependency>
 
-        <!-- Kafka Avro and Schema Registry -->
-        <dependency>
-            <groupId>io.confluent</groupId>
-            <artifactId>kafka-avro-serializer</artifactId>
-            <version>7.5.0</version>
-            <exclusions>
-                <!-- Excluir javax.ws.rs-api transitiva -->
-                <exclusion>
-                    <groupId>javax.ws.rs</groupId>
-                    <artifactId>javax.ws.rs-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.confluent</groupId>
-            <artifactId>kafka-schema-registry-client</artifactId>
-            <version>7.5.0</version>
-        </dependency>
-
-        <!-- Avro -->
+        <!-- Apache Avro -->
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>1.11.2</version>
-        </dependency>
-
-        <!-- JAX-RS API -->
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
         </dependency>
 
         <!-- Test Dependencies -->
@@ -90,18 +77,26 @@
             <artifactId>spring-kafka-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- JAX-RS (javax.ws.rs-api) -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
-            <!-- Spring Boot -->
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- Kotlin -->
+
+            <!-- Kotlin Maven Plugin -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -121,7 +116,8 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- Avro -->
+
+            <!-- Apache Avro Maven Plugin -->
             <plugin>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
@@ -146,6 +142,7 @@
     </build>
 
     <repositories>
+        <!-- Confluent Maven Repository -->
         <repository>
             <id>confluent</id>
             <url>https://packages.confluent.io/maven/</url>
