@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "PessoaDTO",
+  "namespace": "com.ajudaqui.me_diz_ai_o_que_foi.entity",
+  "fields" : [
+    {"name": "name", "type": "string"},
+    {"name": "lastName", "type": "string"}
+  ]
+}
